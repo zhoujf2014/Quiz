@@ -80,9 +80,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
-    protected void loadDataFromServer(String url, RequestBody body, int tag) {
+    protected void loadDataFromServer(String head, String url, RequestBody body, int tag) {
 
-        new NetWorkUtil(netInterface).loadDataFromServer(url,body,tag);
+        new NetWorkUtil(netInterface).loadDataFromServer(head,url,body,tag);
     }
 
     private NetworkInterface netInterface = new NetworkInterface() {

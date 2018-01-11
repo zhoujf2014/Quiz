@@ -58,7 +58,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/rem_pwd"/>
         </LinearLayout>
-
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
@@ -71,11 +70,12 @@
     </LinearLayout>
 
     <TextView
+        android:background="@drawable/btn_normal"
         android:id="@+id/ip_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/x80"
-        android:text="服务器地址:10.1.34.74:8011"/>
+        android:text="修改服务器地址"/>
 </LinearLayout>
 

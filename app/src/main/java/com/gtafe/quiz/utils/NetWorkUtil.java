@@ -26,21 +26,35 @@ public class NetWorkUtil {
     }
 
 
-    public void loadDataFromServer(String url, RequestBody body, final int tag) {
+    public void loadDataFromServer(String head,String url, RequestBody body, final int tag) {
         mOkHttpClient = new OkHttpClient();
         String URL = Constant.HEAD + url;
         Log.e(TAG, "loadDataFromServer: "+URL );
         Request request = null;
-        if (body == null) {
-            request = new Request.Builder()
-                    .url(URL)
-                    .build();
-        } else {
-            request = new Request.Builder()
-                    .post(body)
-                    .url(URL)
-                    .build();
+        if (head==null){
+            if (body == null) {
+                request = new Request.Builder()
+                        .url(URL)
+                        .build();
+            } else {
+                request = new Request.Builder()
+                        .post(body)
+                        .url(URL)
+                        .build();
+            }
+        }else {
+            if (body == null) {
+                request = new Request.Builder()
+                        .url(head+url)
+                        .build();
+            } else {
+                request = new Request.Builder()
+                        .post(body)
+                        .url(head+url)
+                        .build();
+            }
         }
+
 
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override

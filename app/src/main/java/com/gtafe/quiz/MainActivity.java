@@ -1,7 +1,6 @@
 package com.gtafe.quiz;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -45,7 +44,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        loadDataFromServer("ExperimentalExercise/getAnswer", null, 1);
+        loadDataFromServer("http://10.1.136.166:5080/", "ExperimentalExercise/getAnswer", null, 1);
         initState();
         mItemAdapter = new ItemAdapter();
         mVp.setAdapter(mItemAdapter);
@@ -89,7 +88,7 @@ public class MainActivity extends BaseActivity {
         stringBuffer.append("{");
         for (int i = 0; i < mStuAnswer.size(); i++) {
 
-            stringBuffer.append(i + 1 + ":");
+            stringBuffer.append(mQuestBean.getData().getList().get(i).getID() +":");
             String s = mStuAnswer.get(i);
             if (s.length() < 1) {
                 Toast.makeText(mContext, "未完成所有题目，不能提交", Toast.LENGTH_SHORT).show();
@@ -133,7 +132,8 @@ public class MainActivity extends BaseActivity {
                         RequestBody body = new FormBody.Builder().add("eid", mQuestBean.getData().getEid() + "").add("stuNO", "aa").add("strAnswer", stringBuffer.toString()).build();
                         Log.e(TAG, "onViewClicked:getEid =" + mQuestBean.getData().getEid() + " stringBuffer.toString()=" + stringBuffer.toString());
                         // RequestBody body =null;
-                        loadDataFromServer("ExperimentalExercise/stusaveAnswer", body, 2);
+
+                        loadDataFromServer("http://10.1.136.166:5080/", "ExperimentalExercise/stusaveAnswer", body, 2);
 
 
                     }
@@ -417,7 +417,6 @@ public class MainActivity extends BaseActivity {
     protected void loadDataFromServerSuccessful(String string, int tag) {
         super.loadDataFromServerSuccessful(string, tag);
         Gson gson = new Gson();
-
         if (tag == 1) {
             QuestBean questBean = gson.fromJson(string, QuestBean.class);
             if (questBean != null) {
@@ -431,11 +430,10 @@ public class MainActivity extends BaseActivity {
                 mPager.setText(mCurrentPosition + 1 + "/" + mItemCount);
                 mItemAdapter.notifyDataSetChanged();
             }
-
         } else if (tag == 2) {
             Log.e(TAG, "loadDataFromServerSuccessful: " + string);
             StuAnswer stuAnswer = gson.fromJson(string, StuAnswer.class);
-            Toast.makeText(mContext, "提交" + stuAnswer.getMsg() + stuAnswer.getData(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "提交" + stuAnswer.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 

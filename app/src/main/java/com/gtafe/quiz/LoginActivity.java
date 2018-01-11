@@ -61,7 +61,7 @@ public class LoginActivity extends BaseActivity {
         mPwd.setText(passWord);
         mUser.setText(userName);
         RequestBody body = new FormBody.Builder().add("userName", userName).add("userPwd", passWord).build();
-        loadDataFromServer("dataapi/user/checkUserLogin", body, 1);
+        loadDataFromServer("http://10.1.136.166:5080/", "dataapi/user/checkUserLogin", body, 1);
 
     }
 
@@ -78,16 +78,16 @@ public class LoginActivity extends BaseActivity {
                 startActivity(new Intent(mContext, MainActivity.class));
                 finish();
             } else {
-                showToast("用户名或者密码错误");
+              //  showToast("用户名或者密码错误");
             }
         }
-        showToast(string);
+      //  showToast(string);
     }
 
     @Override
     protected void loadDataFromServerFail(String s, int tag) {
         if (tag == 1) {
-            showToast("服务器异常，请检查服务器");
+          //  showToast("服务器异常，请检查服务器");
         }
     }
 
@@ -149,7 +149,7 @@ public class LoginActivity extends BaseActivity {
 
 
                 RequestBody body = new FormBody.Builder().add("userName", userName).add("userPwd", password).build();
-                loadDataFromServer("dataapi/user/checkUserLogin", body, 1);
+                loadDataFromServer("http://10.1.136.166:5080/","dataapi/user/checkUserLogin", body, 1);
                 break;
         }
     }
