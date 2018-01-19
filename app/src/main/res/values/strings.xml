@@ -18,16 +18,16 @@
     <string name="pwd_hint">密码</string>
 
     <!--首页-->
-    <string name="exercise_note">练习记录</string>
-    <string name="error_paper">错题本</string>
-    <string name="store">我的收藏</string>
+    <string name="exercise_note">课堂练习</string>
+    <string name="error_paper">实训室预约</string>
+    <string name="store">课程资源</string>
     <string name="quick_entry">快速入口</string>
     <string name="wel_user">欢迎小明同学</string>
 
     <string name="exe_num">做过的题数</string>
     <string name="exe_time">完成练习次数</string>
     <string name="right_pec">平均答对率</string>
-    <string name="start_question">抽题练习</string>
+    <string name="start_question">让教育更智慧</string>
 
     <string name="notice">公告</string>
     <string name="version_update">版本更新</string>

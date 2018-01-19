@@ -76,13 +76,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void showToast(String msg) {
 
-        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-
+       Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
 
-    protected void loadDataFromServer(String url, RequestBody body, int tag) {
+    protected void loadDataFromServer(String head, String url, RequestBody body, int tag) {
 
-        new NetWorkUtil(netInterface).loadDataFromServer(url,body,tag);
+        new NetWorkUtil(netInterface).loadDataFromServer(head,url,body,tag);
     }
 
     private NetworkInterface netInterface = new NetworkInterface() {
@@ -128,7 +127,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 动态的设置状态栏  实现沉浸式状态栏
      */
     protected void initState() {
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

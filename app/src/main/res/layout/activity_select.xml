@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60"
+            android:background="@drawable/bg_gradient"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/bg_gradient"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.gtafe.quiz.widget.RoundAngleImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:layout_marginLeft="@dimen/user_icon__margintl"
+                android:background="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar2x"
+                />
+
+            <TextView
+                android:id="@+id/select_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/user_icon__margintl"
+                android:textColor="@color/white">
+
+            </TextView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/exerciseDetail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y720"
+            android:background="@drawable/bg_gradient"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/x500"
+                android:layout_height="@dimen/x500"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/y50"
+                android:src="@drawable/gta_logo"/>
+
+            <Button
+                android:id="@+id/bt_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/startquestion_margintb"
+                android:layout_marginLeft="@dimen/startquestion_marginlr"
+                android:layout_marginRight="@dimen/startquestion_marginlr"
+                android:layout_marginTop="@dimen/startquestion_margintb"
+                android:background="@drawable/bg_btn_startselquestion"
+                android:text="@string/start_question"
+                android:textColor="@color/start_question_text"/>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y180"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/quickstart_padding"
+            android:paddingTop="@dimen/quickstart_padding">
+            <TextView
+                android:id="@+id/select_quiz"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/icon_padding"
+                android:drawableTop="@mipmap/icon_exercise"
+                android:gravity="center"
+                android:text="@string/exercise_note"/>
+
+            <TextView
+                android:id="@+id/select_order"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/execise_error_bg"
+                android:drawablePadding="@dimen/icon_padding"
+                android:drawableTop="@mipmap/icon_errorquestion"
+                android:gravity="center"
+                android:text="@string/error_paper" />
+
+            <TextView
+                android:id="@+id/select_res"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/icon_padding"
+                android:drawableTop="@mipmap/icon_favorites"
+                android:gravity="center"
+                android:text="@string/store"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

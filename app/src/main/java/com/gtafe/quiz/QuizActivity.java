@@ -1,7 +1,6 @@
 package com.gtafe.quiz;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,7 +24,7 @@ import butterknife.OnClick;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
-public class MainActivity extends BaseActivity {
+public class QuizActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
 
 
@@ -34,8 +32,6 @@ public class MainActivity extends BaseActivity {
     public ItemAdapter mItemAdapter;
     @BindView(R.id.vp)
     ViewPager mVp;
-    @BindView(R.id.back)
-    ImageView mBack;
     @BindView(R.id.confir)
     TextView mConfir;
     @BindView(R.id.pager)
@@ -43,9 +39,11 @@ public class MainActivity extends BaseActivity {
     private int mItemCount = 0;
     private int mCurrentPosition = 0;
 
+
     @Override
     protected void init() {
-        loadDataFromServer("ExperimentalExercise/getAnswer", null, 1);
+
+        loadDataFromServer(null, "ExperimentalExercise/getAnswer", null, 88);
         initState();
         mItemAdapter = new ItemAdapter();
         mVp.setAdapter(mItemAdapter);
@@ -87,9 +85,12 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked() {
         final StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("{");
+        if (mStuAnswer==null) {
+            return;
+        }
         for (int i = 0; i < mStuAnswer.size(); i++) {
 
-            stringBuffer.append(i + 1 + ":");
+            stringBuffer.append(mQuestBean.getData().getList().get(i).getID()+ ":");
             String s = mStuAnswer.get(i);
             if (s.length() < 1) {
                 Toast.makeText(mContext, "未完成所有题目，不能提交", Toast.LENGTH_SHORT).show();
@@ -130,10 +131,10 @@ public class MainActivity extends BaseActivity {
                 }).setPositiveButton("是", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        RequestBody body = new FormBody.Builder().add("eid", mQuestBean.getData().getEid() + "").add("stuNO", "aa").add("strAnswer", stringBuffer.toString()).build();
+                        RequestBody body = new FormBody.Builder().add("eid", mQuestBean.getData().getEid() + "").add("stuNO", QuizAppcation.userCode).add("strAnswer", stringBuffer.toString()).build();
                         Log.e(TAG, "onViewClicked:getEid =" + mQuestBean.getData().getEid() + " stringBuffer.toString()=" + stringBuffer.toString());
                         // RequestBody body =null;
-                        loadDataFromServer("ExperimentalExercise/stusaveAnswer", body, 2);
+                        loadDataFromServer(null, "ExperimentalExercise/stusaveAnswer", body, 99);
 
 
                     }
@@ -212,8 +213,6 @@ public class MainActivity extends BaseActivity {
 
                         break;
                 }
-
-
             }
 
             class AnswerAdapter extends BaseAdapter {
@@ -279,9 +278,11 @@ public class MainActivity extends BaseActivity {
                                 switch (mQuestionType) {
                                     //单选
                                     case 1:
-                                        mStringAnswer = getStringByPosition(position);
-
+                                        answerString = getStringByPosition(position);
+                                        Log.e(TAG, "onClick:mStringAnswer= " + mStringAnswer);
+                                        mStringAnswer = answerString;
                                         //多选
+                                        break;
                                     case 2:
                                         answerString = getStringByPosition(position);
 
@@ -295,12 +296,11 @@ public class MainActivity extends BaseActivity {
                                     case 3:
                                         mStringAnswer = (position == 0) ? "Y" : "N";
                                         break;
-
                                 }
                                 Log.e(TAG, "onClick:mStringAnswer= " + mStringAnswer);
                                 mStuAnswer.set(mPosition, mStringAnswer);
                                 String s = mStuAnswer.get(mPosition);
-                                Log.e(TAG, "onClick:mStringAnswer= " + s);
+                                Log.e(TAG, "onClick:mStringAnswer= "+position+"   " + s);
                                 notifyDataSetChanged();
 
                             }
@@ -312,7 +312,6 @@ public class MainActivity extends BaseActivity {
                                 if (mStringAnswer.contains("Y")) {
                                     mTvOId.setBackgroundResource(R.drawable.btn_green);
                                 } else {
-
                                     mTvOId.setBackgroundResource(R.drawable.btn_option);
                                 }
                                 mTvOId.setText("A");
@@ -327,7 +326,6 @@ public class MainActivity extends BaseActivity {
                                 mTvOId.setText("B");
                                 mTvOName.setText("错");
                             }
-
                         } else {
                             String stringByPosition = getStringByPosition(position);
                             if (mStringAnswer.contains(stringByPosition)) {
@@ -335,7 +333,6 @@ public class MainActivity extends BaseActivity {
                                 mTvOId.setBackgroundResource(R.drawable.btn_green);
                             } else {
                                 mTvOId.setBackgroundResource(R.drawable.btn_option);
-
                             }
                             mTvOId.setText(answerlistBean.getQuestionOptions().
                                     get(position).
@@ -418,7 +415,9 @@ public class MainActivity extends BaseActivity {
         super.loadDataFromServerSuccessful(string, tag);
         Gson gson = new Gson();
 
-        if (tag == 1) {
+        if (tag == 88) {
+            Log.e(TAG, "loadDataFromServerSuccessful: "+string );
+
             QuestBean questBean = gson.fromJson(string, QuestBean.class);
             if (questBean != null) {
                 mQuestBean = questBean;
@@ -432,10 +431,10 @@ public class MainActivity extends BaseActivity {
                 mItemAdapter.notifyDataSetChanged();
             }
 
-        } else if (tag == 2) {
+        } else if (tag == 99) {
             Log.e(TAG, "loadDataFromServerSuccessful: " + string);
             StuAnswer stuAnswer = gson.fromJson(string, StuAnswer.class);
-            Toast.makeText(mContext, "提交" + stuAnswer.getMsg() + stuAnswer.getData(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "提交" + stuAnswer.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 

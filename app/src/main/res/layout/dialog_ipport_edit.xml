@@ -4,13 +4,38 @@
               android:layout_height="wrap_content"
               android:orientation="vertical">
 
+    <TextView
+        android:paddingTop="@dimen/x20"
+        android:layout_margin="@dimen/x10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登陆地址："
+        android:textSize="@dimen/x30"/>
+
     <com.gtafe.quiz.ClearEditText
-        android:id="@+id/dialog_edit"
-        android:textSize="@dimen/x55"
+        android:id="@+id/dialog_edit_login"
         android:layout_width="@dimen/x600"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/y70"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/x30"
         android:background="@drawable/bg_edit_rectangle_sel"
-        android:layout_margin="@dimen/x50"></com.gtafe.quiz.ClearEditText>
+        android:textSize="@dimen/x35"></com.gtafe.quiz.ClearEditText>
+
+    <TextView
+        android:layout_margin="@dimen/x10"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="答题地址："
+        android:textSize="@dimen/x30"/>
+
+    <com.gtafe.quiz.ClearEditText
+        android:id="@+id/dialog_edit_answer"
+        android:layout_width="@dimen/x600"
+        android:layout_height="@dimen/y70"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/x30"
+        android:background="@drawable/bg_edit_rectangle_sel"
+        android:textSize="@dimen/x35"></com.gtafe.quiz.ClearEditText>
 
 </LinearLayout>

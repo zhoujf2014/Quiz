@@ -7,43 +7,33 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    tools:context="com.gtafe.quiz.MainActivity">
-
+    tools:context="com.gtafe.quiz.QuizActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/y180"
         android:background="@color/indicator_bg">
-
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:paddingTop="30dp"
-            android:src="@drawable/selector_back"/>
-
         <TextView
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="40dp"
-            android:paddingTop="30dp"
+            android:paddingTop="40dp"
             android:text="随堂练习"
-            android:textSize="20sp"/>
+            android:textSize="@dimen/x40"/>
         <TextView
+            android:textColor="@color/white"
             android:visibility="gone"
             android:padding="10dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="@dimen/x350"
             android:layout_gravity="bottom"
             android:id="@+id/pager"
             android:text="5/20"
+            android:textSize="@dimen/x25"
             android:layout_width="80dp"
             android:layout_height="wrap_content"/>
-
     </LinearLayout>
-
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
@@ -56,6 +46,8 @@
         />
 
     <TextView
+        android:textColor="@color/white"
+
         android:id="@+id/confir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,6 +56,6 @@
         android:gravity="center"
         android:padding="@dimen/x15"
         android:text="提交答案"
-        android:textSize="@dimen/x45"/>
+        android:textSize="@dimen/x38"/>
 
 </LinearLayout>

@@ -85,7 +85,7 @@
     <dimen name="error_marginB">32dp</dimen>
     <!--首页-->
     <dimen name="quickstart_padding">16dp</dimen>
-    <dimen name="icon_padding">6dp</dimen>
+    <dimen name="icon_padding">@dimen/y12</dimen>
     <dimen name="tab_width">60dp</dimen>
     <dimen name="startquestion_marginlr">60dp</dimen>
     <dimen name="startquestion_margintb">24dp</dimen>

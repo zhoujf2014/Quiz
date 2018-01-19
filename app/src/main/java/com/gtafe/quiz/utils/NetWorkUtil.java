@@ -26,10 +26,17 @@ public class NetWorkUtil {
     }
 
 
-    public void loadDataFromServer(String url, RequestBody body, final int tag) {
+    public void loadDataFromServer(String head, String url, RequestBody body, final int tag) {
         mOkHttpClient = new OkHttpClient();
-        String URL = Constant.HEAD + url;
-        Log.e(TAG, "loadDataFromServer: "+URL );
+        String URL = null;
+        if (tag == 66) {
+
+            URL = Constant.IP_PORT_LOGIN + url;
+        } else  {
+            URL = Constant.IP_PORT_ANSWER + url;
+
+        }
+        Log.e(TAG, "loadDataFromServer: " + URL);
         Request request = null;
         if (body == null) {
             request = new Request.Builder()
@@ -47,7 +54,6 @@ public class NetWorkUtil {
             public void onFailure(Call call, IOException e) {
 
                 mNetworkInterface.onLoadDataFail("访问网络失败", tag);
-
             }
 
             @Override
